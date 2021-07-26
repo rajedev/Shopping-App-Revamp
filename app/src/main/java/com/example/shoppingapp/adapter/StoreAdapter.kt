@@ -1,0 +1,48 @@
+package com.example.shoppingapp.adapter
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.shoppingapp.databinding.ItemProductBinding
+import com.example.shoppingapp.model.Store
+
+class StoreAdapter : RecyclerView.Adapter<StoreAdapter.StoreViewHolder>() {
+
+    var products = mutableListOf<Store>()
+    lateinit var context: Context
+
+    fun setProductList(products: List<Store>) {
+        this.products = products.toMutableList()
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreViewHolder {
+        context = parent.context
+        val binding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return StoreViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: StoreViewHolder, position: Int) {
+        holder.bindView(products[position])
+    }
+
+    override fun getItemCount(): Int {
+        return products.size
+    }
+
+    inner class StoreViewHolder(private val binding: ItemProductBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bindView(store: Store) {
+            binding.apply {
+                productTv.text = store.title
+                Glide.with(context).load(store.image).into(productIv)
+            }
+        }
+
+    }
+
+
+}
