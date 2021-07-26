@@ -38,6 +38,8 @@ class StoreAdapter : RecyclerView.Adapter<StoreAdapter.StoreViewHolder>() {
         fun bindView(store: Store) {
             binding.apply {
                 productTv.text = store.title
+                productPrice.text = "₹" + store.price.toString()
+                productCategoryTv.text = store.category
                 Glide.with(context).load(store.image).into(productIv)
             }
         }
