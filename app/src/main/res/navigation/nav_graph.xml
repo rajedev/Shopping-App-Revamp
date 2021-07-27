@@ -23,4 +23,10 @@
             android:name="product"
             app:argType="com.example.shoppingapp.model.Store" />
     </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.shoppingapp.ui.fragment.CartFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_cart" />
+    <action android:id="@+id/action_global_cartFragment" app:destination="@id/cartFragment" />
 </navigation>
