@@ -32,7 +32,11 @@ class StoreAdapter(
     }
 
     override fun getItemCount(): Int {
-        return products.size
+        return if (products.isEmpty()) {
+            0
+        } else {
+            products.size
+        }
     }
 
     inner class StoreViewHolder(private val binding: ItemProductBinding) :

@@ -18,10 +18,12 @@ class StoreViewModel constructor(private val repository: StoreRepository) : View
     fun getAllProducts() {
         val response = repository.getAllProducts()
 
-        response.enqueue(object : Callback<List<Store>>{
+        response.enqueue(object : Callback<List<Store>> {
             override fun onResponse(call: Call<List<Store>>, response: Response<List<Store>>) {
-                productList.postValue(response.body())
-                Log.d(TAG, "onResponse: ${response.body()}")
+                if (response.isSuccessful) {
+                    productList.postValue(response.body())
+                    Log.d(TAG, "onResponse: ${response.body()}")
+                }
             }
 
             override fun onFailure(call: Call<List<Store>>, t: Throwable) {
