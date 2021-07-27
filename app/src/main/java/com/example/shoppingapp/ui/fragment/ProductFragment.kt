@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -27,9 +28,13 @@ class ProductFragment : Fragment() {
             productCategoryFp.text = args.product.category
             productPriceFp.text = "₹" + args.product.price.toString()
             productDescFp.text = args.product.description
+
+            addToCartBtn.setOnClickListener {
+                Toast.makeText(requireContext(), "Added to the Cart", Toast.LENGTH_SHORT).show()
+            }
+
         }
         val imageUrl = args.product.image
-
         Glide.with(this).load(imageUrl).into(binding.productImageFp)
 
         return binding.root
