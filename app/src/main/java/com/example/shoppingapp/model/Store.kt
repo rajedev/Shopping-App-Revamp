@@ -10,5 +10,6 @@ data class Store(
     val price: Float,
     val description: String,
     val category: String,
-    val image: String
+    val image: String,
+    var isPlaced: Boolean = false
 ) : Parcelable

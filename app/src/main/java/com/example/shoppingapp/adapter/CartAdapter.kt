@@ -3,10 +3,13 @@ package com.example.shoppingapp.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.shoppingapp.R
 import com.example.shoppingapp.databinding.CartItemBinding
 import com.example.shoppingapp.model.Store
+import com.example.shoppingapp.util.setUi
 
 class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
@@ -38,11 +41,25 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     inner class CartViewHolder(private val binding: CartItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bindView(store: Store) {
             binding.apply {
                 cartItemTitle.text = store.title
                 cartItemPrice.text = "₹" + store.price.toString()
                 Glide.with(context).load(store.image).into(cartItemIv)
+            }
+
+            if (store.isPlaced) {
+                binding.placeOrderBtn.setUi("Order Placed", context, R.color.yellow)
+            } else {
+                binding.placeOrderBtn.text = "Place Order"
+            }
+            binding.placeOrderBtn.setOnClickListener {
+                if (!store.isPlaced) {
+                    store.isPlaced = true
+                    Toast.makeText(context, "Order has been Placed", Toast.LENGTH_SHORT).show()
+                    notifyDataSetChanged()
+                }
             }
         }
 
