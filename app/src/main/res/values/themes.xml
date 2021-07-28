@@ -3,7 +3,7 @@
     <style name="Theme.ShoppingApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/vampire_black</item>
-        <item name="colorPrimaryVariant">@color/dark_grey</item>
+        <item name="colorPrimaryVariant">@color/lite_black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
