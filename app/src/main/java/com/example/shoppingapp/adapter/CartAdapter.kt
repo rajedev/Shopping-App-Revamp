@@ -2,8 +2,8 @@ package com.example.shoppingapp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.shoppingapp.R
@@ -11,7 +11,9 @@ import com.example.shoppingapp.databinding.CartItemBinding
 import com.example.shoppingapp.model.Store
 import com.example.shoppingapp.util.setUi
 
-class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
+class CartAdapter(
+    private val listener: OnCartItemClickListener
+) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     private var cartItems = mutableListOf<Store>()
     private lateinit var context: Context
@@ -40,7 +42,7 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     }
 
     inner class CartViewHolder(private val binding: CartItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
         fun bindView(store: Store) {
             binding.apply {
@@ -54,15 +56,27 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
             } else {
                 binding.placeOrderBtn.text = "Place Order"
             }
-            binding.placeOrderBtn.setOnClickListener {
-                if (!store.isPlaced) {
-                    store.isPlaced = true
-                    Toast.makeText(context, "Order has been Placed", Toast.LENGTH_SHORT).show()
-                    notifyDataSetChanged()
-                }
-            }
+//            binding.placeOrderBtn.setOnClickListener {
+//                if (!store.isPlaced) {
+//                    store.isPlaced = true
+//                    Toast.makeText(context, "Order has been Placed", Toast.LENGTH_SHORT).show()
+//                    notifyDataSetChanged()
+//                }
+//            }
         }
 
+        init {
+            binding.placeOrderBtn.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            listener.onCartItemClick(cartItems[adapterPosition])
+        }
+
+    }
+
+    interface OnCartItemClickListener {
+        fun onCartItemClick(cart: Store)
     }
 
 }

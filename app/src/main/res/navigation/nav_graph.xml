@@ -31,7 +31,15 @@
         android:id="@+id/cartFragment"
         android:name="com.example.shoppingapp.ui.fragment.CartFragment"
         android:label="Cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <action
         android:id="@+id/action_global_cartFragment"
         app:destination="@id/cartFragment"
@@ -39,4 +47,13 @@
         app:exitAnim="@anim/slide_out_bottom"
         app:popEnterAnim="@anim/slide_in_bottom"
         app:popExitAnim="@anim/slide_out_top" />
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.example.shoppingapp.ui.fragment.CheckoutFragment"
+        android:label="Checkout"
+        tools:layout="@layout/fragment_checkout">
+        <argument
+            android:name="cartItem"
+            app:argType="com.example.shoppingapp.model.Store" />
+    </fragment>
 </navigation>
